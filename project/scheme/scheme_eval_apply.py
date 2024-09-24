@@ -104,7 +104,7 @@ def eval_all(expressions, env):
         return eval_all(expressions.rest, env)
         
     else:
-        print("Debug:", expressions.first)
+        #print("Debug:", expressions.first)
         return scheme_eval(expressions.first, env)
     #return scheme_eval(expressions.first, env) # replace this with lines of your own code
     

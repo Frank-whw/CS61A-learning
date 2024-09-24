@@ -129,6 +129,24 @@ def do_and_form(expressions, env):
     """
     # BEGIN PROBLEM 12
     "*** YOUR CODE HERE ***"
+    #print("Debug:", expressions)
+    if expressions is nil:
+        return True
+    front = scheme_eval(expressions.first, env)
+    if is_scheme_true(front):
+        if expressions.rest is nil:
+            return front
+        else:
+            return do_and_form(expressions.rest, env)
+    else:
+        return False
+    ''' if is_scheme_false(expressions.first):
+        return False
+    elif expressions.rest is nil:
+        return scheme_eval(expressions.first, env)
+    else:
+        scheme_eval(expressions.first, env)
+        return do_and_form(expressions.rest, env)'''
     # END PROBLEM 12
 
 def do_or_form(expressions, env):
@@ -147,6 +165,14 @@ def do_or_form(expressions, env):
     """
     # BEGIN PROBLEM 12
     "*** YOUR CODE HERE ***"
+    if expressions is nil:
+        return False
+    front = scheme_eval(expressions.first, env)
+    if is_scheme_true(front):
+        return front
+    else:
+        return do_or_form(expressions.rest, env)
+    
     # END PROBLEM 12
 
 def do_cond_form(expressions, env):
@@ -167,6 +193,11 @@ def do_cond_form(expressions, env):
         if is_scheme_true(test):
             # BEGIN PROBLEM 13
             "*** YOUR CODE HERE ***"
+            if clause.rest is not nil:
+                return eval_all(clause.rest, env)
+            else:
+                return test
+
             # END PROBLEM 13
         expressions = expressions.rest
 
@@ -191,6 +222,15 @@ def make_let_frame(bindings, env):
     names = vals = nil
     # BEGIN PROBLEM 14
     "*** YOUR CODE HERE ***"
+    pos = bindings
+    while pos is not nil:
+        front = pos.first
+        validate_form(front, 2, 2)
+        names = Pair(front.first, names)
+        vals = Pair(eval_all(front.rest, env), vals)
+        pos = pos.rest
+    validate_formals(names)
+
     # END PROBLEM 14
     return env.make_child_frame(names, vals)
 

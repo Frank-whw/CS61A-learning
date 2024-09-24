@@ -1,0 +1,3 @@
+'hailstone-correct', (0, 70)
+'merge-correct', (512, 70)
+'yield_paths-correct', (1024, 70)

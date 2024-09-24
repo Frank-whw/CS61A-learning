@@ -1,0 +1,4 @@
+'Trees-correct', (0, 70)
+'cumulative_mul-correct', (512, 70)
+'prune_small-correct', (1024, 70)
+'delete-correct', (1536, 70)
